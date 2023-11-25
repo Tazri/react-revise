@@ -1,124 +1,104 @@
-# React Component and Props
+# Props Types
 
-## React Component
+> 🟢 It's practice to define props type inside the component. For this, first we need a npm package called **prop-types**.
 
-> 🟢 **React Component** is a function which is return a react element or class which is extends `React.Component` class and has `render` method which is return a react element.
+**Example to define prop type in function component :**
+```js
+import PropTypes from "prop-types";
 
-**Here is the simple function component :**
-```jsx
-function Component(){
-    return (<>
-        <h1>Return JSX element</h1>
-    </>);
+functionComponent.propTypes = {
+    propName : PropTypes.type
 }
 ```
 
-**Here is the simple class component :**
-
-Rule of declare class component : 
-- The class must be extends `React.Component` class.
-- The class must be has `render` method.
-- The `render` method always return a JSX or React Element.
-
+**Example to define prop type in class component :**
 ```js
-import React from "react";
+import PropTypes from "prop-types";
 
-class Component extends React.Component{
-    render(){
-        return (<>
-            <h1>Return JSX element</h1>
-        </>)
-    }
+ClassComponent.propTypes = {
+    propName : PropTypes.type
 }
 ```
 
-## Using Component
-**Application of function component :**
-
-There is a two way to use function component :
-1. Call it directy with paramter.
-2. Used it using JSX.
-
-```js
-// using funciton component
-FunctionComponent(props /** is object */);
-
-
-// use function component by JSX
-<FunctionComponent /> // it means FunctionComponent()
-
-// call function component with childer using JSX
-<FunctionComponent>
-    <h1>Children</h1> 
-    // children will available in props.children as array
-</FunctionComponent> 
-```
-
-**Application of class component :**
-
-There is a two way to use class component :
-1. Create object. Which is react component.
-2. Create object using JSX.
-
+**Here is an example documenting the different validators provided :**
 ```jsx
-let element = new ClassComponent(props /** is object */);
+Comptonent.propTypes = {
+    // JS type
+    optionalArray : PropTypes.array,
+    optionalBool : PropTypes.bool,
+    optionalFunc : PropTypes.func,
+    optionalNumber : PropTypes.number,
+    optionalObject : PropTypes.object,
+    optionalString : PropTypes.string,
+    optionalSymbol : PropTypes.symbol,
 
-// use jsx
-<ClassComponent /> // same things
+    // anything that can rendered numbers, strings, elements or an array
+    // (or fragment) containing these types.
+    optionalNode : PropTypes.node,
 
-// use class component with children
-<ClassComponent>
-    <h1>Children</h1>
-    // children will avaiable in this.props.children as array or single element.
-</ClassComponent>
-```
+    // react element
+    optionalElement : PropTypes.element,
 
-## Props
+    // A react element type or a component
+    optionalElementType : PropTypes.elementType,
 
-> 🟢 **Props** is one kind of read-only object. Which used to pass data from one component to another.
+    // instance of class or not
+    optionalClass : PropTypes.instanceOf(ClassName),
 
-**Sending Props :**
-```jsx
-// sending props in function and class component are same
-<FunctionComponent propsProperty = Value />
-<ClassComponent propsProperty = Value />
-```
+    // enum type to limited prop values.
+    optionalEnum : propTypes.oneOf(["valueOne","valueTwo"]),
 
-**Receiving Props in Functional Component :**
-```js
-function FunctionalComponent(props){
-    let {
-        propsProperty 
-    } = props;
+    // an object that could be one of many type
+    optionalUnion : PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+        PropTypes.instanceOf(Message)
+    ]),
 
-    return jsxElement;
+    // array of certain type
+    optionalArrayOf : PropTypes.arrayOf(PropTypes.number),
+
+    // an object of certain value
+    optionalObjectOf : PropTypes.objectOf(PropTypes.number),
+
+    // an object taking on a particular shape
+    optionalObjectWithShape : PropTypes.shape({
+        property : PropTypes.string,
+        propertyOne : PropTypes.number
+    }),
+
+    // an object with warnings on extra properties
+    optionalObjectWithStrictShape : PropTypes.exact({
+        property : PropTypes.string,
+        propertyOne : PropTypes.number
+    }),
+
+    // required the prop types
+    requiredProps : PropTypes.func.isRequried,
+
+    // custom prop type using function
+    custromProp : function(props,propName,componentName){
+        // if props is not ok then return new Error.
+    },
+
+    // custom array prop
+    customArrayProp : PropTypes.arrayOf(function(propValue,key,componentName,location,propFullName){
+        // if prop is not ok then return new Error.
+    })
 }
 ```
 
-**Receiving Props in Class Component :**
+**Default Props Value :**
 ```js
+Component.defaultProps = {
+    propName : "value"
+}
+
+// after ES2022 it possible to declared prop default value inside the class using static property
+
 class ClassComponent extends React.Component{
-    render(){
-        let {
-            propsProperty
-        } = this.props;
-        
-        return jsxElement;
-    }
-}
-```
-
-**If props used in state then receive it inside constructor :**
-```jsx
-class ClassComponent extends React.Component{
-    constructor(props){
-        super(props);
-
-        // here do anything with props for state
-    }
-
-    render(){
-        return jsxElement;
+    static defaultProps = {
+        propName : "value"
     }
 }
 ```
