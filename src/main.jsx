@@ -1,22 +1,16 @@
-import React from "react";
 import { createRoot } from "react-dom/client";
+// import Clock from "./components/Clock";
+import ClassClock from "./components/ClassClock";
 
 
-let element = React.createElement(
-    "div",
-    {
-        style : {
-            color : "#0088ff",
-            fontSize : "30px"
-        }
-    },
-    React.createElement("h1",null,"This is header!"),
-    React.createElement("p",null,"This is text.")
-    );
 
-console.log(element);
+let Clock = (
+    <ClassClock locale="bn-BD">
+        This is message
+    </ClassClock>
+)
 
-createRoot(document.getElementById("root")).render(element);
+createRoot(document.getElementById("root")).render(Clock);
 
 // deprecated
 // ReactDOM.render(document.getElementById("root"),element);

@@ -1,145 +1,126 @@
-# React JSX and Rendering Element
+# React Component and Props
 
-## How to create react element
+## React Component
 
-> 🟢 `React.createElement()` function use for create react element. 
+> 🟢 **React Component** is a function which is return a react element or class which is extends `React.Component` class and has `render` method which is return a react element.
 
-Here is the details of `React.createElement()` function :
+**Here is the simple function component :**
+```jsx
+function Component(){
+    return (<>
+        <h1>Return JSX element</h1>
+    </>);
+}
+```
+
+**Here is the simple class component :**
+
+Rule of declare class component : 
+- The class must be extends `React.Component` class.
+- The class must be has `render` method.
+- The `render` method always return a JSX or React Element.
 
 ```js
 import React from "react";
 
-React.createElement("ElementName",props,...childrens);
-
-// it create object like this : 
-{
-    type : "ElementName",
-    props : {
-        /* rest of the property of props what passed */
-        children : [...childrens]
+class Component extends React.Component{
+    render(){
+        return (<>
+            <h1>Return JSX element</h1>
+        </>)
     }
 }
 ```
 
-**Example of create simple react element :**
-```js
-import React from "react";
+## Using Component
+**Application of function component :**
 
-React.createElement("h1",null,"Hello,Worlds!");
-
-// this object like : 
-{
-    type : "h1",
-    props : {
-        children : "Hello, Worlds!"
-    }
-}
-```
-
-**Another example of create simple react element :**
-```js
-let element = React.createElement(
-    "div",
-    {
-        style : {
-            color : "#0088ff",
-            fontSize : "30px"
-        }
-    },
-    React.createElement("h1",null,"This is header!"),
-    React.createElement("p",null,"This is text.")
-    );
-
-// this object like : 
-{
-    type : "div",
-    props : {
-        style : {
-            color : "#0088ff",
-            fontSize : "30px" 
-        },
-        children : [
-            {
-                type : "h1",
-                props : {
-                    children : "This is header!"
-                }
-            },
-            {
-                type : "p",
-                props : {
-                    children : "This is text."
-                }
-            }
-        ]
-    }
-}
-```
-
-<hr />
-
-## JSX
-
-> 🟢 **JSX** full form is JavaScript XML. JSX nothing but a syntactic sugar to write **JSX** element and React Component. It's like to write html code in JavaScript.
-
-**Here is example :**
-```js
-<h1>Hello, Worlds!</h1>
-
-// it convert behind the scene like this : 
-React.createElement("h1",null,"Hello, Worlds!");
-
-// must be write multiline jsx inside the first bracket
-// otherwise it can be create a problem in future.
-(<div style="color:#0088ff,fontSize : 30px">
-    <h1>This is header!</h1>
-    <p>This is text.</p>
-</div>)
-
-// it conver behind the scene like this : 
-React.createElement(
-    "div",
-    {
-        style : "color:#0088ff,fontSize : 30px"
-    },
-    React.createElement("h1",null,"This is header!"),
-    React.createElement("p",null,"This is text.")
-    );
-
-```
-
-## Interpolation
-
-> 🟢 Use dynamic value inside the JSX called interpolation.
+There is a two way to use function component :
+1. Call it directy with paramter.
+2. Used it using JSX.
 
 ```js
-<h1>Hello, {expression}</h1>
+// using funciton component
+FunctionComponent(props /** is object */);
 
-// another example
-<h1>Hello, {getUserName()}</h1>
+
+// use function component by JSX
+<FunctionComponent /> // it means FunctionComponent()
+
+// call function component with childer using JSX
+<FunctionComponent>
+    <h1>Children</h1> 
+    // children will available in props.children as array
+</FunctionComponent> 
 ```
 
-## Rendering JSX Element
+**Application of class component :**
 
-**In the classic way which is now deprecated :**
-```js
-import ReactDom from "react-dom";
+There is a two way to use class component :
+1. Create object. Which is react component.
+2. Create object using JSX.
 
-ReactDom.render(htmlElement,reactElement);
-```
-
-**Example :**
 ```jsx
-import ReactDom from "react-dom";
+let element = new ClassComponent(props /** is object */);
 
-ReactDom.render(document.getElementById("root"),APP);
+// use jsx
+<ClassComponent /> // same things
+
+// use class component with children
+<ClassComponent>
+    <h1>Children</h1>
+    // children will avaiable in this.props.children as array or single element.
+</ClassComponent>
 ```
 
-**Current way to render JSX Element :**
-```jsx
-import { createRoot } from "react-dom/client";
+## Props
 
-createRoot(document.getElementById("root")).render(element);
+> 🟢 **Props** is one kind of read-only object. Which used to pass data from one component to another.
+
+**Sending Props :**
+```jsx
+// sending props in function and class component are same
+<FunctionComponent propsProperty = Value />
+<ClassComponent propsProperty = Value />
+```
+
+**Receiving Props in Functional Component :**
+```js
+function FunctionalComponent(props){
+    let {
+        propsProperty 
+    } = props;
+
+    return jsxElement;
+}
+```
+
+**Receiving Props in Class Component :**
+```js
+class ClassComponent extends React.Component{
+    render(){
+        let {
+            propsProperty
+        } = this.props;
+        
+        return jsxElement;
+    }
+}
+```
+
+**If props used in state then receive it inside constructor :**
+```jsx
+class ClassComponent extends React.Component{
+    constructor(props){
+        super(props);
+
+        // here do anything with props for state
+    }
+
+    render(){
+        return jsxElement;
+    }
+}
 ```
 
 <hr />
