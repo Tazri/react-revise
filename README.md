@@ -1,104 +1,79 @@
-# Props Types
+# State and Lifecycle
 
-> 🟢 It's practice to define props type inside the component. For this, first we need a npm package called **prop-types**.
+## State
 
-**Example to define prop type in function component :**
-```js
-import PropTypes from "prop-types";
+> 🟢 **State** is a object linked with class which contain some property. If change the state particular way then react update the component.
 
-functionComponent.propTypes = {
-    propName : PropTypes.type
-}
-```
-
-**Example to define prop type in class component :**
-```js
-import PropTypes from "prop-types";
-
-ClassComponent.propTypes = {
-    propName : PropTypes.type
-}
-```
-
-**Here is an example documenting the different validators provided :**
+**Syntax of define state :**
 ```jsx
-Comptonent.propTypes = {
-    // JS type
-    optionalArray : PropTypes.array,
-    optionalBool : PropTypes.bool,
-    optionalFunc : PropTypes.func,
-    optionalNumber : PropTypes.number,
-    optionalObject : PropTypes.object,
-    optionalString : PropTypes.string,
-    optionalSymbol : PropTypes.symbol,
+class ClassComponent extends React.Component{
+    constructor(props){
+        super(props);
 
-    // anything that can rendered numbers, strings, elements or an array
-    // (or fragment) containing these types.
-    optionalNode : PropTypes.node,
+        this.state = {
+            // here is state.
+        }
+    }
 
-    // react element
-    optionalElement : PropTypes.element,
-
-    // A react element type or a component
-    optionalElementType : PropTypes.elementType,
-
-    // instance of class or not
-    optionalClass : PropTypes.instanceOf(ClassName),
-
-    // enum type to limited prop values.
-    optionalEnum : propTypes.oneOf(["valueOne","valueTwo"]),
-
-    // an object that could be one of many type
-    optionalUnion : PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number,
-        PropTypes.instanceOf(Message)
-    ]),
-
-    // array of certain type
-    optionalArrayOf : PropTypes.arrayOf(PropTypes.number),
-
-    // an object of certain value
-    optionalObjectOf : PropTypes.objectOf(PropTypes.number),
-
-    // an object taking on a particular shape
-    optionalObjectWithShape : PropTypes.shape({
-        property : PropTypes.string,
-        propertyOne : PropTypes.number
-    }),
-
-    // an object with warnings on extra properties
-    optionalObjectWithStrictShape : PropTypes.exact({
-        property : PropTypes.string,
-        propertyOne : PropTypes.number
-    }),
-
-    // required the prop types
-    requiredProps : PropTypes.func.isRequried,
-
-    // custom prop type using function
-    custromProp : function(props,propName,componentName){
-        // if props is not ok then return new Error.
-    },
-
-    // custom array prop
-    customArrayProp : PropTypes.arrayOf(function(propValue,key,componentName,location,propFullName){
-        // if prop is not ok then return new Error.
-    })
+    // another way to define state
+    state = {
+        // here is state
+    };
 }
 ```
 
-**Default Props Value :**
-```js
-Component.defaultProps = {
-    propName : "value"
+## Update State
+
+> 🟢 Use `this.setState` method to update state. It take a object and merge with previous state and update the component accordingly.
+
+```jsx
+updateState(){
+    this.setState({
+        property : value
+    });
 }
+```
 
-// after ES2022 it possible to declared prop default value inside the class using static property
+> 🔴 Don't update state directly.
 
+## Asynchronous State Update
+
+> 🟢 `setState` also take a function for handling asyncrhonous state update.
+
+```jsx
+this.setState((state,props)=>{
+    return {
+        property : value;
+    };
+
+    // return object merged with state.
+})
+```
+
+## Lifecycle Method
+
+> 🟢 Custom function which is executed during the different phases of a component. There are 3 categories of lifecycle method available in react. **mounting**, **updating** and **unmounting**.
+
+### componentDidMount Method
+
+> 🟢 `componentDidMount` method called when the camponent is mounted.
+
+```js
 class ClassComponent extends React.Component{
-    static defaultProps = {
-        propName : "value"
+    componentDidMount(){
+        // what to do after mount the component.
+    }
+}
+```
+
+### componentWillUnmount
+
+> 🟢 `componentWillUnmount` method called when the component is unmounted. It use for free resources what component taken.
+
+```js
+class ClassComponent extends React.Component{
+    componentWillUnmount(){
+        // what to do after unmount the component.
     }
 }
 ```

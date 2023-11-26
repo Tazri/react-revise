@@ -1,16 +1,13 @@
-import { createRoot } from "react-dom/client";
-// import Clock from "./components/Clock";
-import ClassClock from "./components/ClassClock";
+import React from "react";
+import {createRoot} from "react-dom/client";
+import App from "./App";
 
 
-
-let Clock = (
-    <ClassClock locale="bn-BD">
-        This is message
-    </ClassClock>
-)
-
-createRoot(document.getElementById("root")).render(Clock);
+createRoot(document.getElementById("root")).render(
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>
+);
 
 // deprecated
 // ReactDOM.render(document.getElementById("root"),element);
