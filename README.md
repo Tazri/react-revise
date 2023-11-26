@@ -1,145 +1,81 @@
-# React JSX and Rendering Element
+# State and Lifecycle
 
-## How to create react element
+## State
 
-> 🟢 `React.createElement()` function use for create react element. 
+> 🟢 **State** is a object linked with class which contain some property. If change the state particular way then react update the component.
 
-Here is the details of `React.createElement()` function :
+**Syntax of define state :**
+```jsx
+class ClassComponent extends React.Component{
+    constructor(props){
+        super(props);
 
-```js
-import React from "react";
-
-React.createElement("ElementName",props,...childrens);
-
-// it create object like this : 
-{
-    type : "ElementName",
-    props : {
-        /* rest of the property of props what passed */
-        children : [...childrens]
-    }
-}
-```
-
-**Example of create simple react element :**
-```js
-import React from "react";
-
-React.createElement("h1",null,"Hello,Worlds!");
-
-// this object like : 
-{
-    type : "h1",
-    props : {
-        children : "Hello, Worlds!"
-    }
-}
-```
-
-**Another example of create simple react element :**
-```js
-let element = React.createElement(
-    "div",
-    {
-        style : {
-            color : "#0088ff",
-            fontSize : "30px"
+        this.state = {
+            // here is state.
         }
-    },
-    React.createElement("h1",null,"This is header!"),
-    React.createElement("p",null,"This is text.")
-    );
+    }
 
-// this object like : 
-{
-    type : "div",
-    props : {
-        style : {
-            color : "#0088ff",
-            fontSize : "30px" 
-        },
-        children : [
-            {
-                type : "h1",
-                props : {
-                    children : "This is header!"
-                }
-            },
-            {
-                type : "p",
-                props : {
-                    children : "This is text."
-                }
-            }
-        ]
+    // another way to define state
+    state = {
+        // here is state
+    };
+}
+```
+
+## Update State
+
+> 🟢 Use `this.setState` method to update state. It take a object and merge with previous state and update the component accordingly.
+
+```jsx
+updateState(){
+    this.setState({
+        property : value
+    });
+}
+```
+
+> 🔴 Don't update state directly.
+
+## Asynchronous State Update
+
+> 🟢 `setState` also take a function for handling asyncrhonous state update.
+
+```jsx
+this.setState((state,props)=>{
+    return {
+        property : value;
+    };
+
+    // return object merged with state.
+})
+```
+
+## Lifecycle Method
+
+> 🟢 Custom function which is executed during the different phases of a component. There are 3 categories of lifecycle method available in react. **mounting**, **updating** and **unmounting**.
+
+### componentDidMount Method
+
+> 🟢 `componentDidMount` method called when the camponent is mounted.
+
+```js
+class ClassComponent extends React.Component{
+    componentDidMount(){
+        // what to do after mount the component.
     }
 }
 ```
 
-<hr />
+### componentWillUnmount
 
-## JSX
-
-> 🟢 **JSX** full form is JavaScript XML. JSX nothing but a syntactic sugar to write **JSX** element and React Component. It's like to write html code in JavaScript.
-
-**Here is example :**
-```js
-<h1>Hello, Worlds!</h1>
-
-// it convert behind the scene like this : 
-React.createElement("h1",null,"Hello, Worlds!");
-
-// must be write multiline jsx inside the first bracket
-// otherwise it can be create a problem in future.
-(<div style="color:#0088ff,fontSize : 30px">
-    <h1>This is header!</h1>
-    <p>This is text.</p>
-</div>)
-
-// it conver behind the scene like this : 
-React.createElement(
-    "div",
-    {
-        style : "color:#0088ff,fontSize : 30px"
-    },
-    React.createElement("h1",null,"This is header!"),
-    React.createElement("p",null,"This is text.")
-    );
-
-```
-
-## Interpolation
-
-> 🟢 Use dynamic value inside the JSX called interpolation.
+> 🟢 `componentWillUnmount` method called when the component is unmounted. It use for free resources what component taken.
 
 ```js
-<h1>Hello, {expression}</h1>
-
-// another example
-<h1>Hello, {getUserName()}</h1>
-```
-
-## Rendering JSX Element
-
-**In the classic way which is now deprecated :**
-```js
-import ReactDom from "react-dom";
-
-ReactDom.render(htmlElement,reactElement);
-```
-
-**Example :**
-```jsx
-import ReactDom from "react-dom";
-
-ReactDom.render(document.getElementById("root"),APP);
-```
-
-**Current way to render JSX Element :**
-```jsx
-import { createRoot } from "react-dom/client";
-
-createRoot(document.getElementById("root")).render(element);
+class ClassComponent extends React.Component{
+    componentWillUnmount(){
+        // what to do after unmount the component.
+    }
+}
 ```
 
 <hr />
