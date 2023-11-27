@@ -1,145 +1,108 @@
-# React JSX and Rendering Element
+# Handling Event
 
-## How to create react element
+> 🟢 Handling events in react is similar with handling event in DOM. There two rules for it : 
 
-> 🟢 `React.createElement()` function use for create react element. 
-
-Here is the details of `React.createElement()` function :
-
-```js
-import React from "react";
-
-React.createElement("ElementName",props,...childrens);
-
-// it create object like this : 
-{
-    type : "ElementName",
-    props : {
-        /* rest of the property of props what passed */
-        children : [...childrens]
-    }
-}
-```
-
-**Example of create simple react element :**
-```js
-import React from "react";
-
-React.createElement("h1",null,"Hello,Worlds!");
-
-// this object like : 
-{
-    type : "h1",
-    props : {
-        children : "Hello, Worlds!"
-    }
-}
-```
-
-**Another example of create simple react element :**
-```js
-let element = React.createElement(
-    "div",
-    {
-        style : {
-            color : "#0088ff",
-            fontSize : "30px"
-        }
-    },
-    React.createElement("h1",null,"This is header!"),
-    React.createElement("p",null,"This is text.")
-    );
-
-// this object like : 
-{
-    type : "div",
-    props : {
-        style : {
-            color : "#0088ff",
-            fontSize : "30px" 
-        },
-        children : [
-            {
-                type : "h1",
-                props : {
-                    children : "This is header!"
-                }
-            },
-            {
-                type : "p",
-                props : {
-                    children : "This is text."
-                }
-            }
-        ]
-    }
-}
-```
-
-<hr />
-
-## JSX
-
-> 🟢 **JSX** full form is JavaScript XML. JSX nothing but a syntactic sugar to write **JSX** element and React Component. It's like to write html code in JavaScript.
-
-**Here is example :**
-```js
-<h1>Hello, Worlds!</h1>
-
-// it convert behind the scene like this : 
-React.createElement("h1",null,"Hello, Worlds!");
-
-// must be write multiline jsx inside the first bracket
-// otherwise it can be create a problem in future.
-(<div style="color:#0088ff,fontSize : 30px">
-    <h1>This is header!</h1>
-    <p>This is text.</p>
-</div>)
-
-// it conver behind the scene like this : 
-React.createElement(
-    "div",
-    {
-        style : "color:#0088ff,fontSize : 30px"
-    },
-    React.createElement("h1",null,"This is header!"),
-    React.createElement("p",null,"This is text.")
-    );
-
-```
-
-## Interpolation
-
-> 🟢 Use dynamic value inside the JSX called interpolation.
-
-```js
-<h1>Hello, {expression}</h1>
-
-// another example
-<h1>Hello, {getUserName()}</h1>
-```
-
-## Rendering JSX Element
-
-**In the classic way which is now deprecated :**
-```js
-import ReactDom from "react-dom";
-
-ReactDom.render(htmlElement,reactElement);
-```
+- React events are named using camelCase, rather than lowercase.
+- Pass function as event handler rather than pass string.
 
 **Example :**
 ```jsx
-import ReactDom from "react-dom";
+// in html
+<button onclick="doSomething()">
+    Click It.
+</button>
 
-ReactDom.render(document.getElementById("root"),APP);
+// in jsx
+<button onClick={doSomething}>
+    Click It.
+</button>
 ```
 
-**Current way to render JSX Element :**
+## Prevent From Submit Default Behaviour
 ```jsx
-import { createRoot } from "react-dom/client";
+function Form(){
+    function handleSubmit(e){
+        e.preventDefault();
+    }
 
-createRoot(document.getElementById("root")).render(element);
+    return (
+        <form onSubmit={handleSubmit}>
+            <button type="submit">Submit</button>
+        </form>
+    )
+}
+```
+
+> 🟢 When using React, generally don't need to call addEventListener to add listeners to a DOM element after it is created. Instead, just provide a listener when the element is initially rendered.
+
+```jsx
+class Toggle extends React.Component{
+    constructor(props){
+        super(props);
+
+        this.state = {
+            isToggleOn : true
+        };
+
+        // bind the handler with object
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(){
+        this.setState(prevState = >({
+            isToggleOn : !prevState.isToggleOn
+        }));
+    }
+
+    render(){
+        return(){
+            <button onClick={this.handleClick}>
+                {this.state.isToggleOn ? "ON" : "OFF"}
+            </button>
+        }
+    }
+}
+```
+
+**If bind is confuse thing then use arrow funciton instead :**
+
+```js
+class ClassComponent extends React.Component{
+    handleEvent = ()=>{
+        console.log("This is : ",this);
+    }
+}
+```
+
+**Another way is call function using arrow funciton :**
+```js
+class LoggingButton extends React.Component {
+  handleClick() {
+    console.log('this is:', this);
+  }
+
+  render() {
+    // This syntax ensures `this` is bound within handleClick
+    return (
+      <button onClick={() => this.handleClick()}>
+        Click me
+      </button>
+    );
+  }
+}
+```
+
+## shouldComponentUpdate Lifecycle Method
+
+**`shouldComponentUpdate` method used for decide to component going to render or not :**
+
+```js
+shouldComponentUpdate(nextProps){
+    return boolean;
+    // true if need to update
+    // false if don't need to update
+}
 ```
 
 <hr />
+
