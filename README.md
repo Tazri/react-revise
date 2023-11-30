@@ -1,106 +1,58 @@
-# Handling Event
+# Conditional Rendering
 
-> 🟢 Handling events in react is similar with handling event in DOM. There two rules for it : 
+## Render with Ternary operator
 
-- React events are named using camelCase, rather than lowercase.
-- Pass function as event handler rather than pass string.
+**Example to render JSX element based on state with ternary Operator :**
 
-**Example :**
 ```jsx
-// in html
-<button onclick="doSomething()">
-    Click It.
-</button>
-
-// in jsx
-<button onClick={doSomething}>
-    Click It.
-</button>
-```
-
-## Prevent From Submit Default Behaviour
-```jsx
-function Form(){
-    function handleSubmit(e){
-        e.preventDefault();
-    }
-
-    return (
-        <form onSubmit={handleSubmit}>
-            <button type="submit">Submit</button>
-        </form>
+render(){
+    return(
+        <div>
+            { 
+                this.state.on ? 
+                    <h1>Switch is On</h1> :
+                    <h1>Switch is off</h1>
+            }
+        </div>
     )
 }
 ```
 
-> 🟢 When using React, generally don't need to call addEventListener to add listeners to a DOM element after it is created. Instead, just provide a listener when the element is initially rendered.
+## Inline If With Logical && Operator
+
+**Example to render using Logical && operator :**
 
 ```jsx
-class Toggle extends React.Component{
-    constructor(props){
-        super(props);
-
-        this.state = {
-            isToggleOn : true
-        };
-
-        // bind the handler with object
-        this.handleClick = this.handleClick.bind(this);
-    }
-
-    handleClick(){
-        this.setState(prevState = >({
-            isToggleOn : !prevState.isToggleOn
-        }));
-    }
-
-    render(){
-        return(){
-            <button onClick={this.handleClick}>
-                {this.state.isToggleOn ? "ON" : "OFF"}
-            </button>
-        }
-    }
+render(){
+    return(
+        <div>
+            <h1>Hello!</h1>
+            {unreadMessage.length > 0 && 
+                <h2>
+                    You have {unreadMessage.length} unread message.
+                </h2>
+            }
+        </div>
+    )
 }
 ```
 
-**If bind is confuse thing then use arrow funciton instead :**
+## Preventing Component from Rendering
+
+> 🟢 If need to prevent component to rendering then just return null.
+
+**Example :**
 
 ```js
-class ClassComponent extends React.Component{
-    handleEvent = ()=>{
-        console.log("This is : ",this);
-    }
-}
-```
+function WarningBanner({warning}){
+    if(!warning) return null
+    
 
-**Another way is call function using arrow funciton :**
-```js
-class LoggingButton extends React.Component {
-  handleClick() {
-    console.log('this is:', this);
-  }
-
-  render() {
-    // This syntax ensures `this` is bound within handleClick
     return (
-      <button onClick={() => this.handleClick()}>
-        Click me
-      </button>
-    );
-  }
-}
-```
-
-## shouldComponentUpdate Lifecycle Method
-
-**`shouldComponentUpdate` method used for decide to component going to render or not :**
-
-```js
-shouldComponentUpdate(nextProps){
-    return boolean;
-    // true if need to update
-    // false if don't need to update
+        <div className="warnning">
+            Warning!
+        </div>
+    )
 }
 ```
 
