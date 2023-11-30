@@ -1,6 +1,6 @@
 import React from "react";
+import Form from "./Form";
 import PropTypes from "prop-types";
-import UiList from "./UiList";
 
 class App extends React.Component{
     render(){
@@ -8,19 +8,17 @@ class App extends React.Component{
             style
         } = this.props;
 
-        let items = [1,2,3,4,5,6,7];
-
         return (
             <>
                 <div style={style}>
-                    <UiList items={items} />
+                    <h1>Form handling</h1>
+
+                    <Form />
                 </div>
-                
             </>
         )
     }
 }
-
 
 App.propTypes = {
     style : PropTypes.object
@@ -28,12 +26,17 @@ App.propTypes = {
 
 App.defaultProps = {
     style : {
-        color : "#0088ff",
-        fontFamily : "'Fira Code',arial",
-        fontSize : "1.5em",
-        textAlign : "center"
+        display : "flex",
+        flexDirection : "column",
+        justifyItems : "center",
+        alignItems : "center",
+        backgroundColor : "#8800ff",
+        color : "#f0f8ff",
+        fontSize : "1.4em",
+        fontFamily : "'Fira Code',arial"
     }
 }
+
 
 
 export default App;

@@ -1,23 +1,62 @@
-# Lists and Keys
+# Forms
 
-> 🟢 It is possible to render array of component using curly brucket.
+## Controlled Components
 
-```js
-<ul>{listLiItems}</ul>
+> 🟢 An input form element whose value is controlled by React in this way is called a **"controlled component"**.
+
+> 🔴 In react way every form input element bind with **state** and it update when state is update by `useState` method. This process is called **single source of truth**.
+
+**For exmaple :**
+```jsx
+handleSubmit = (event)=>{
+    event.preventDefault();
+
+    console.log("Form are submited");
+}
+
+handleChange = (event)=>{
+    this.setState({value: event.target.value});
+}
+
+render(){
+    return(
+        <form>
+            <input type="text"
+               value={this.state.value}
+               onChange={this.handleChange}
+            />
+        </form>
+    )
+}
 ```
 
+## The textarea tag
 
-> 🔴 But in that case every item must be hold `key` attribute with unique value. Don't use array index as a key because it is not good practice instead use `Math.random()` good as well.
+> 🟢 In React, a `<textarea>` uses a value attribute instead of write something inside. Here is example : 
 
-## Rendering Multiple Components With Keys
-
-```js
-const numbers = [1,2,3,4,5];
-
-const listItems = numbers.map(number=>{
-    <li key={Math.random()}>{number}</li>
-})
+```jsx
+<textarea value={this.state.value} onChange={this.handleChange} />
 ```
 
+## Select Tag
+
+> 🟢 In `<select>` tag, react use `value` attribute instead of use `selected` attribute.
+
+```jsx
+<select value={this.state.value} onChange={this.handleChange}>
+    <option value="ReactJS">ReactJS</option>
+    <option value="AngularJs">AngularJS</option>
+    <option value="VueJS">VueJS</option>
+    <option value="NextJS">NextJS</option>
+</select>
+```
+
+## The file input tag
+
+> 🟢 File input tag is uncontrolled component in React because it's value is read-only and manipulated by JavaScript via the `File API`.
+
+## Controlled Input null value
+
+> 🟢 If set `value` attribute to `null` or `undefined` value then it will becomes editable.
 
 <hr />
