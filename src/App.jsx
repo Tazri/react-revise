@@ -1,6 +1,6 @@
 import React from "react";
-import Form from "./Form";
 import PropTypes from "prop-types";
+import Calculator from "./Calculator";
 
 class App extends React.Component{
     render(){
@@ -11,9 +11,7 @@ class App extends React.Component{
         return (
             <>
                 <div style={style}>
-                    <h1>Form handling</h1>
-
-                    <Form />
+                    <Calculator />
                 </div>
             </>
         )
@@ -33,7 +31,8 @@ App.defaultProps = {
         backgroundColor : "#8800ff",
         color : "#f0f8ff",
         fontSize : "1.4em",
-        fontFamily : "'Fira Code',arial"
+        fontFamily : "'Fira Code',arial",
+        padding : "20px"
     }
 }
 
