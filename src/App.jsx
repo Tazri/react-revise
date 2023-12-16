@@ -1,17 +1,31 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Calculator from "./Calculator";
+import AddEmoji from "./AddEmoji";
+import Text from "./Text";
+import AddBracket from "./AddBracket";
 
 class App extends React.Component{
     render(){
         const {
             style
         } = this.props;
-
+        
         return (
             <>
                 <div style={style}>
-                    <Calculator />
+                   <AddEmoji>
+                        {({addEmoji})=>{
+                            return (<AddBracket>
+                                {({addBracket})=>{
+                                    return (
+                                        <Text addEmoji={addEmoji} addBracket={addBracket}>
+                                            Hell my life...
+                                        </Text>
+                                    )
+                                }}
+                            </AddBracket>)
+                        }}
+                   </AddEmoji>
                 </div>
             </>
         )
