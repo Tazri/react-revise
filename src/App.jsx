@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import AddEmoji from "./AddEmoji";
-import Text from "./Text";
-import AddBracket from "./AddBracket";
+import ButtonCounter from "./ButtonCounter";
+import HoverCounter from "./HoverCounter";
 
 class App extends React.Component{
     render(){
@@ -13,19 +12,8 @@ class App extends React.Component{
         return (
             <>
                 <div style={style}>
-                   <AddEmoji>
-                        {({addEmoji})=>{
-                            return (<AddBracket>
-                                {({addBracket})=>{
-                                    return (
-                                        <Text addEmoji={addEmoji} addBracket={addBracket}>
-                                            Hell my life...
-                                        </Text>
-                                    )
-                                }}
-                            </AddBracket>)
-                        }}
-                   </AddEmoji>
+                   <ButtonCounter />
+                   <HoverCounter />
                 </div>
             </>
         )

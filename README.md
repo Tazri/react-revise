@@ -1,7 +1,14 @@
-# Composition and Inheritance
+# Higher Order Component (HOC)
 
-> 🟢 React recommend using composition instead of inheritance to reuse code between components.
+> 🟢 Higher Order Component is a design pattern which is a one kind of function. This function take a component as parameter and return a component.
 
-> 🟢 Component composition is a fundamental concept in React that allows us to build complex UIs by combining smaller, independent components. It promotes code reusability, 
+> 🟢 Convention to write Higher order component is start the naming with `with` word.
 
+**For example :**
+```jsx
+function withHOC(Component){
+    return AnotherComponentOrModifiyTheComponent;
+}
+
+```
 <hr />
