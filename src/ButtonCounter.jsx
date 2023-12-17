@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import withCounter from "./withCounter";
 
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -33,4 +32,4 @@ ButtonCounter.defaultProps = {
 
 
 // eslint-disable-next-line react-refresh/only-export-components
-export default withCounter(ButtonCounter);
+export default ButtonCounter;

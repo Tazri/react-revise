@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import ButtonCounter from "./ButtonCounter";
 import HoverCounter from "./HoverCounter";
+import Counter from "./Counter";
 
 class App extends React.Component{
     render(){
@@ -12,8 +13,27 @@ class App extends React.Component{
         return (
             <>
                 <div style={style}>
-                   <ButtonCounter />
-                   <HoverCounter />
+                   <Counter>
+                    {({increamentCount,count})=>{
+                        return (
+                            <ButtonCounter
+                                increamentCount={increamentCount}
+                                count={count}
+                            />
+                        )
+                    }}
+                   </Counter>
+
+                   <Counter>
+                    {({increamentCount,count})=>{
+                        return (
+                            <HoverCounter
+                                increamentCount={increamentCount}
+                                count={count}
+                            />
+                        )
+                    }}
+                   </Counter>
                 </div>
             </>
         )

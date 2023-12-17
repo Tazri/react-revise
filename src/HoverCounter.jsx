@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import withCounter from "./withCounter";
 
 // eslint-disable-next-line react-refresh/only-export-components
 function HoverCounter(props){
@@ -32,4 +31,4 @@ HoverCounter.defaultProps = {
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-export default withCounter(HoverCounter);
+export default HoverCounter;
